@@ -668,7 +668,10 @@ function gesamtpunkte(matches, nurBeendet) {
         }
 
         return punkte;
-    }, { red: 0, purple: 0 });
+    }, {
+        red: TURNIER_CONFIG.startstand.red,
+        purple: TURNIER_CONFIG.startstand.purple,
+    });
 }
 
 function punktzahl(wert) {

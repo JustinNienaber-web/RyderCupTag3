@@ -13,4 +13,5 @@ const TURNIER_CONFIG = Object.freeze({
     redTeam: "RED TIGERS",
     purpleTeam: "PURPLE VIPERS",
     anzahlMatches: 15,
+    startstand: Object.freeze({ red: 5, purple: 10 }),
 });

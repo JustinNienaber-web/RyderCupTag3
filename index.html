@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta name="theme-color" content="#17131f">
+
+    <meta
+        name="description"
+        content="Geschütztes Live E-Scoring für Ryder Cup 2026 Tag 3"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Ryder Cup Live"
+    >
+
+    <title>Ryder Cup Live</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body>
+    <main class="app" id="app">
+        <header class="app-header" id="app-header">
+            <div class="turnier-marke" aria-hidden="true">
+                <span class="marke-rot"></span>
+                <span class="marke-violett"></span>
+            </div>
+
+            <div>
+                <h1>Ryder Cup 2026</h1>
+                <p>Tag 3 · Einzel-Lochspiel</p>
+            </div>
+        </header>
+
+        <section
+            class="hauptkarte"
+            id="hauptkarte"
+            aria-live="polite"
+        >
+            <h2>App wird geladen</h2>
+            <p>Die Verbindung zum Spieltag wird vorbereitet.</p>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="platzdaten.js"></script>
+    <script src="sync.js"></script>
+    <script src="app.js?v=2"></script>
+</body>
+</html>

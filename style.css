@@ -1,0 +1,973 @@
+:root {
+    --rot: #b9232f;
+    --rot-dunkel: #851722;
+    --rot-hell: #fff2f3;
+    --violett: #6b2c91;
+    --violett-dunkel: #491765;
+    --violett-hell: #f7f0fb;
+    --dunkel: #17131f;
+    --text: #292431;
+    --text-leise: #706979;
+    --linie: #ded9e3;
+    --flaeche: #ffffff;
+    --hintergrund: #f5f3f7;
+    --schatten: 0 16px 40px rgba(30, 20, 40, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--hintergrund);
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 10% 0%, rgba(185, 35, 47, 0.08), transparent 30rem),
+        radial-gradient(circle at 90% 5%, rgba(107, 44, 145, 0.1), transparent 32rem),
+        var(--hintergrund);
+    font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body.eingabe-modus {
+    background: #f3f6f3;
+}
+
+body.eingabe-modus .app {
+    padding-top: 4px;
+}
+
+body.eingabe-modus .app-header {
+    display: none;
+}
+
+body.eingabe-modus .hauptkarte {
+    padding-top: 12px;
+}
+
+.netzstatus {
+    display: none;
+    margin: 8px 0 0;
+    padding: 2px 4px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-align: center;
+    pointer-events: none;
+}
+
+body.eingabe-modus .hauptkarte > .netzstatus {
+    display: block;
+}
+
+.netzstatus-online {
+    color: #155d3a;
+    background: transparent;
+}
+
+.netzstatus-speichert {
+    color: #674c0b;
+    background: transparent;
+}
+
+.netzstatus-offline {
+    color: #8a1b25;
+    background: transparent;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    touch-action: manipulation;
+}
+
+.app {
+    width: min(100% - 28px, 760px);
+    margin: 0 auto;
+    padding: 28px 0 40px;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 4px 22px;
+}
+
+.app-header h1 {
+    margin: 0;
+    color: var(--dunkel);
+    font-size: clamp(1.55rem, 5vw, 2.15rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+}
+
+.app-header p {
+    margin: 5px 0 0;
+    color: var(--text-leise);
+    font-size: 0.9rem;
+}
+
+.turnier-marke {
+    position: relative;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 7px 18px rgba(45, 27, 58, 0.18);
+}
+
+.turnier-marke span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+}
+
+.marke-rot {
+    left: 0;
+    background: var(--rot);
+}
+
+.marke-violett {
+    right: 0;
+    background: var(--violett);
+}
+
+.hauptkarte {
+    padding: clamp(20px, 5vw, 34px);
+    overflow: hidden;
+    border: 1px solid rgba(67, 51, 78, 0.14);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: var(--schatten);
+}
+
+.hauptkarte > h2 {
+    margin: 0;
+    color: var(--dunkel);
+    font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+}
+
+.hauptkarte > p {
+    color: var(--text-leise);
+}
+
+.ueberzeile {
+    margin: 0 0 7px !important;
+    color: var(--violett) !important;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.datum {
+    margin: 8px 0 24px;
+    font-weight: 600;
+}
+
+.team-uebersicht {
+    display: grid;
+    gap: 10px;
+    margin: 24px 0;
+}
+
+.team-block {
+    display: grid;
+    gap: 7px;
+    padding: 17px;
+    border: 1px solid;
+    border-radius: 15px;
+}
+
+.team-block span {
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.team-block strong {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.team-rot {
+    color: var(--rot-dunkel);
+    border-color: rgba(185, 35, 47, 0.28);
+    background: var(--rot-hell);
+}
+
+.team-violett {
+    color: var(--violett-dunkel);
+    border-color: rgba(107, 44, 145, 0.28);
+    background: var(--violett-hell);
+}
+
+.gegen {
+    color: var(--text-leise);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.primaer-button {
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 13px;
+    color: #fff;
+    background: linear-gradient(110deg, var(--rot), var(--violett));
+    box-shadow: 0 9px 20px rgba(85, 35, 102, 0.2);
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.primaer-button:active {
+    transform: translateY(1px);
+}
+
+.gefahr-button {
+    width: 100%;
+    min-height: 46px;
+    margin-top: 10px;
+    padding: 10px 16px;
+    border: 1px solid #d9a7ac;
+    border-radius: 12px;
+    color: #8a1b25;
+    background: #fff5f6;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.gefahr-button:active {
+    transform: translateY(1px);
+}
+
+.home-button {
+    min-height: 34px;
+    margin: 0 0 14px;
+    padding: 6px 10px;
+    border: 1px solid var(--linie);
+    border-radius: 9px;
+    color: var(--text);
+    background: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.gefahr-button {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 12px;
+    border: 1px solid #e6b7bb;
+    border-radius: 12px;
+    color: #8a1b25;
+    background: #fff5f6;
+    font-size: 0.78rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.hinweis,
+.hinweis-box {
+    color: var(--text-leise);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.hinweis-box {
+    padding: 15px;
+    border: 1px solid #e7b74c;
+    border-radius: 13px;
+    background: #fff8e9;
+}
+
+.status-symbol {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 14px;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+
+.status-fehler {
+    color: var(--rot-dunkel);
+    background: var(--rot-hell);
+}
+
+.match-liste {
+    display: grid;
+    gap: 12px;
+}
+
+body.leaderboard-modus .app {
+    width: min(100% - 24px, 1500px);
+    padding-top: 16px;
+}
+
+body.leaderboard-modus .app-header {
+    margin-bottom: 12px;
+}
+
+body.leaderboard-modus .hauptkarte {
+    padding: 20px;
+}
+
+body.leaderboard-modus .datum {
+    margin-bottom: 12px;
+}
+
+body.leaderboard-modus .live-gesamtstand {
+    margin-bottom: 14px;
+    padding: 12px 18px;
+}
+
+body.leaderboard-modus .match-liste {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+}
+
+body.leaderboard-modus .match-zeile {
+    grid-template-columns: 1fr auto;
+    gap: 6px 10px;
+    min-width: 0;
+    padding: 10px 12px;
+}
+
+body.leaderboard-modus .match-zeile p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+body.leaderboard-modus .status-pill {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+@media (max-width: 1000px) {
+    body.leaderboard-modus .match-liste {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    body.leaderboard-modus .match-liste {
+        grid-template-columns: 1fr;
+    }
+}
+
+.live-gesamtstand {
+    margin: 0 0 22px;
+    padding: 18px;
+    border-radius: 17px;
+    color: #fff;
+    background: var(--dunkel);
+}
+
+.live-gesamtstand > p {
+    margin: 0 0 13px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.gesamtstand-zeile {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+}
+
+.gesamt-team {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gesamt-team span {
+    font-size: 0.72rem;
+    font-weight: 900;
+}
+
+.gesamt-team strong {
+    font-size: clamp(2rem, 8vw, 3.25rem);
+    line-height: 1;
+}
+
+.gesamt-red {
+    justify-content: flex-end;
+    color: #ff6670;
+}
+
+.gesamt-purple {
+    color: #ce8bf2;
+}
+
+.gesamt-trenner {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.live-gesamtstand small {
+    display: block;
+    margin-top: 13px;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.72rem;
+    text-align: center;
+}
+
+.match-zeile.status-in_progress {
+    border-color: rgba(107, 44, 145, 0.34);
+    box-shadow: 0 5px 14px rgba(47, 31, 57, 0.07);
+}
+
+.match-zeile.status-finished {
+    border-color: rgba(27, 115, 72, 0.3);
+    background: #f3fbf6;
+}
+
+.status-in_progress .status-pill {
+    color: var(--violett-dunkel);
+    background: var(--violett-hell);
+}
+
+.status-finished .status-pill {
+    color: #12623b;
+    background: #dff3e7;
+}
+
+.match-zeile {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    border: 1px solid var(--linie);
+    border-radius: 15px;
+    background: var(--flaeche);
+}
+
+.match-zeile > div {
+    display: grid;
+    gap: 3px;
+    min-width: 72px;
+}
+
+.match-zeile > div strong {
+    color: var(--dunkel);
+}
+
+.match-zeile > div span,
+.match-zeile p {
+    color: var(--text-leise);
+    font-size: 0.8rem;
+}
+
+.match-zeile p {
+    margin: 0;
+    line-height: 1.45;
+}
+
+.gegen-klein {
+    display: block;
+    margin: 2px 0;
+    color: #99929f;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.leaderboard-spieler .leaderboard-red {
+    color: var(--rot-dunkel);
+    font-weight: 700;
+}
+
+.leaderboard-spieler .leaderboard-purple {
+    color: var(--violett-dunkel);
+    font-weight: 700;
+}
+
+.status-pill {
+    padding: 7px 9px;
+    border-radius: 999px;
+    color: #625b68;
+    background: #efedf1;
+    font-size: 0.7rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+    .app {
+        width: min(100% - 20px, 520px);
+        padding-top: 18px;
+    }
+
+    .app-header {
+        margin-bottom: 16px;
+    }
+
+    .hauptkarte {
+        border-radius: 18px;
+    }
+
+    .match-zeile {
+        grid-template-columns: 1fr auto;
+        gap: 8px 12px;
+    }
+
+    .match-zeile p {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .status-pill {
+        grid-column: 2;
+        grid-row: 1;
+    }
+}
+
+@media (max-width: 380px) {
+    .app {
+        width: min(100% - 12px, 520px);
+    }
+
+    .hauptkarte {
+        padding: 17px 14px;
+    }
+
+    .turnier-marke {
+        flex-basis: 36px;
+        width: 36px;
+        height: 36px;
+    }
+}
+
+.loch-kopf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.loch-kopf h2 {
+    margin: 0;
+    color: var(--dunkel);
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.bahn-titel {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: var(--dunkel);
+    background: transparent;
+    font-size: 1.8rem;
+    font-weight: 900;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.bahn-titel span {
+    color: var(--violett);
+    font-size: 1rem;
+}
+
+.loch-daten {
+    display: flex;
+    gap: 7px;
+}
+
+.loch-kopf-rechts {
+    display: grid;
+    justify-items: end;
+    gap: 7px;
+}
+
+.match-stand {
+    color: var(--dunkel);
+    font-size: 0.82rem;
+}
+
+.endstand {
+    margin: 18px 0;
+    padding: 18px;
+    border-radius: 15px;
+    color: #fff;
+    background: linear-gradient(110deg, var(--rot), var(--violett));
+    font-size: 1.7rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.team-uebersicht.kompakt {
+    margin-bottom: 0;
+}
+
+.bahn-auswahl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 22px 0;
+}
+
+.bahn-gruppe {
+    padding: 13px;
+    border: 1px solid var(--linie);
+    border-radius: 15px;
+    background: #faf9fb;
+}
+
+.bahn-gruppe h3 {
+    margin: 0 0 10px;
+    color: var(--text-leise);
+    font-size: 0.78rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.bahn-raster {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+}
+
+.bahn-button {
+    min-height: 42px;
+    border: 1px solid var(--linie);
+    border-radius: 10px;
+    color: var(--text);
+    background: #fff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.bahn-button.bahn-fertig {
+    border-color: rgba(107, 44, 145, 0.38);
+    color: var(--violett-dunkel);
+    background: var(--violett-hell);
+}
+
+.bahn-button.bahn-aktuell {
+    border-color: var(--dunkel);
+    color: #fff;
+    background: var(--dunkel);
+}
+
+.bahn-button:disabled {
+    color: #b9b4bd;
+    background: #f1eff2;
+    cursor: not-allowed;
+}
+
+.sekundaer-button {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--linie);
+    border-radius: 12px;
+    color: var(--text);
+    background: #fff;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.endmaske-zurueck {
+    margin-top: 10px;
+}
+
+.endmaske-scorecard {
+    margin-top: 16px;
+}
+
+.scorecard-scroll {
+    margin: 18px -10px;
+    overflow-x: auto;
+    border: 1px solid var(--linie);
+    border-radius: 13px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.scorecard {
+    width: 100%;
+    min-width: 540px;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 0.74rem;
+    text-align: center;
+}
+
+.scorecard th,
+.scorecard td {
+    min-width: 42px;
+    padding: 8px 5px;
+    border-right: 1px solid var(--linie);
+    border-bottom: 1px solid var(--linie);
+}
+
+.scorecard th:first-child,
+.scorecard td:first-child {
+    min-width: 47px;
+    font-weight: 900;
+}
+
+.scorecard thead th {
+    color: #fff;
+    background: var(--dunkel);
+    font-size: 0.68rem;
+}
+
+.scorecard tbody tr:nth-child(even) {
+    background: #f8f7f9;
+}
+
+.scorecard .summe-rot {
+    color: var(--rot-dunkel);
+    background: var(--rot-hell);
+    font-weight: 900;
+}
+
+.scorecard .summe-purple {
+    color: var(--violett-dunkel);
+    background: var(--violett-hell);
+    font-weight: 900;
+}
+
+.scorecard thead .summe-rot {
+    color: #fff;
+    background: var(--rot);
+}
+
+.scorecard thead .summe-purple {
+    color: #fff;
+    background: var(--violett);
+}
+
+.scorecard-legende {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 12px;
+    margin: 0 0 18px;
+    color: var(--text-leise);
+    font-size: 0.72rem;
+}
+
+.scorecard-legende p {
+    margin: 0;
+}
+
+.scorecard-legende small {
+    grid-column: 1 / -1;
+    margin-top: 6px;
+}
+}
+
+.loch-daten span {
+    padding: 7px 10px;
+    border-radius: 999px;
+    color: var(--text);
+    background: #efedf1;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.loch-teams {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.loch-team {
+    padding: 14px;
+    border: 2px solid transparent;
+    border-radius: 17px;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.loch-team-red {
+    background: var(--rot-hell);
+}
+
+.loch-team-purple {
+    background: var(--violett-hell);
+}
+
+.loch-team-red.team-fuehrt {
+    border-color: var(--rot);
+    box-shadow: 0 7px 18px rgba(185, 35, 47, 0.13);
+}
+
+.loch-team-purple.team-fuehrt {
+    border-color: var(--violett);
+    box-shadow: 0 7px 18px rgba(107, 44, 145, 0.14);
+}
+
+.score-karte {
+    padding: 11px 12px;
+    border: 1px solid rgba(48, 36, 56, 0.12);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.86);
+}
+
+.score-karte + .score-karte {
+    margin-top: 9px;
+}
+
+.spieler-kopf {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.spieler-kopf strong {
+    color: var(--dunkel);
+    font-size: 0.92rem;
+}
+
+.spieler-kopf span,
+.score-karte small {
+    color: var(--text-leise);
+    font-size: 0.66rem;
+}
+
+.spieler-kopf b {
+    color: inherit;
+    font-weight: 800;
+}
+
+.spieler-kopf b.vorgabe-aktiv {
+    color: #d11524;
+}
+
+.score-eingabe {
+    display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0 5px;
+}
+
+.score-eingabe output {
+    color: var(--dunkel);
+    font-size: 1.65rem;
+    font-weight: 900;
+    text-align: center;
+}
+
+.score-button {
+    width: 48px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(60, 45, 69, 0.24);
+    border-radius: 11px;
+    color: var(--dunkel);
+    background: #fff;
+    font-size: 1.35rem;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.score-button:active {
+    transform: scale(0.96);
+}
+
+.aggregat-zeile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 10px 12px 2px;
+    border-top: 1px solid rgba(53, 39, 62, 0.15);
+}
+
+.aggregat-zeile span {
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.aggregat-zeile strong {
+    font-size: 1.25rem;
+}
+
+@media (min-width: 700px) {
+    .loch-teams {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+}
+
+@media (max-width: 420px) {
+    .loch-kopf {
+        margin-bottom: 13px;
+    }
+
+    .loch-kopf h2 {
+        font-size: 1.55rem;
+    }
+
+    .bahn-titel {
+        font-size: 1.55rem;
+    }
+
+    .loch-team {
+        padding: 11px;
+    }
+
+    .score-karte {
+        padding: 9px 10px;
+    }
+
+    .spieler-kopf span {
+        max-width: 130px;
+        text-align: right;
+    }
+
+    .live-gesamtstand {
+        padding: 15px 10px;
+    }
+
+    .gesamtstand-zeile {
+        gap: 7px;
+    }
+
+    .gesamt-team {
+        gap: 6px;
+    }
+
+    .gesamt-team span {
+        max-width: 64px;
+        font-size: 0.6rem;
+    }
+}

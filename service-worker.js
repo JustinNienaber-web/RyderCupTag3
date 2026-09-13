@@ -1,17 +1,17 @@
 "use strict";
 
-const CACHE_NAME = "rydercup-tag3-v3";
+const CACHE_NAME = "rydercup-tag3-v4";
 const SUPABASE_BIBLIOTHEK =
     "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
 
 const APP_DATEIEN = [
     "./",
     "./index.html",
-    "./style.css?v=3",
+    "./style.css?v=4",
     "./config.js",
     "./platzdaten.js",
     "./sync.js",
-    "./app.js?v=3",
+    "./app.js?v=4",
     "./manifest.json",
     "./icon-192.png",
     "./icon-512.png",
